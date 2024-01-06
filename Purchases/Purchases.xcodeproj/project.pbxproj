@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE8176762B49B6DC0089BAAF /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8176752B49B6DC0089BAAF /* Purchase.swift */; };
+		CE8176782B49BD190089BAAF /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8176772B49BD190089BAAF /* ServiceManager.swift */; };
+		CE81767A2B49BD560089BAAF /* PurchaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8176792B49BD560089BAAF /* PurchaseRepository.swift */; };
 		CEBD47F42B48A390008FDE77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD47F32B48A390008FDE77 /* AppDelegate.swift */; };
 		CEBD47F62B48A390008FDE77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD47F52B48A390008FDE77 /* SceneDelegate.swift */; };
 		CEBD47FD2B48A392008FDE77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEBD47FC2B48A392008FDE77 /* Assets.xcassets */; };
@@ -26,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE8176752B49B6DC0089BAAF /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
+		CE8176772B49BD190089BAAF /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		CE8176792B49BD560089BAAF /* PurchaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRepository.swift; sourceTree = "<group>"; };
 		CEBD47F02B48A390008FDE77 /* Purchases.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Purchases.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBD47F32B48A390008FDE77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEBD47F52B48A390008FDE77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +63,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE81766F2B49B5220089BAAF /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CE8176772B49BD190089BAAF /* ServiceManager.swift */,
+				CE8176702B49B52B0089BAAF /* Models */,
+				CE8176792B49BD560089BAAF /* PurchaseRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		CE8176702B49B52B0089BAAF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE8176752B49B6DC0089BAAF /* Purchase.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE8176722B49B6250089BAAF /* HomeModule */ = {
+			isa = PBXGroup;
+			children = (
+				CEE90E602B48AC2600B01728 /* HomeTransition.swift */,
+				CEE90E622B48AC6F00B01728 /* HomeCoordinator.swift */,
+				CEE90E4F2B48A57B00B01728 /* Home */,
+				CEE90E662B48B86600B01728 /* AddPurchase */,
+			);
+			path = HomeModule;
+			sourceTree = "<group>";
+		};
 		CEBD47E72B48A390008FDE77 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +115,7 @@
 				CEE90E532B48AA3F00B01728 /* AppTransition.swift */,
 				CEBD47F32B48A390008FDE77 /* AppDelegate.swift */,
 				CEBD47F52B48A390008FDE77 /* SceneDelegate.swift */,
+				CE81766F2B49B5220089BAAF /* Repository */,
 				CEE90E522B48A8F100B01728 /* Protocols */,
 				CEE90E4C2B48A55D00B01728 /* Views */,
 				CEBD47FC2B48A392008FDE77 /* Assets.xcassets */,
@@ -92,8 +128,7 @@
 		CEE90E4C2B48A55D00B01728 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CEE90E4F2B48A57B00B01728 /* Home */,
-				CEE90E662B48B86600B01728 /* AddPurchase */,
+				CE8176722B49B6250089BAAF /* HomeModule */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -101,8 +136,6 @@
 		CEE90E4F2B48A57B00B01728 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				CEE90E602B48AC2600B01728 /* HomeTransition.swift */,
-				CEE90E622B48AC6F00B01728 /* HomeCoordinator.swift */,
 				CEE90E4D2B48A56F00B01728 /* HomeView.swift */,
 				CEE90E502B48A58C00B01728 /* HomeViewModel.swift */,
 			);
@@ -218,9 +251,12 @@
 				CEBD47F62B48A390008FDE77 /* SceneDelegate.swift in Sources */,
 				CEE90E5F2B48AC1600B01728 /* HomeRouter.swift in Sources */,
 				CEE90E652B48AD3B00B01728 /* App.swift in Sources */,
+				CE8176782B49BD190089BAAF /* ServiceManager.swift in Sources */,
+				CE8176762B49B6DC0089BAAF /* Purchase.swift in Sources */,
 				CEE90E512B48A58C00B01728 /* HomeViewModel.swift in Sources */,
 				CEE90E632B48AC6F00B01728 /* HomeCoordinator.swift in Sources */,
 				CEE90E6A2B48B8F700B01728 /* AddPurchaseView.swift in Sources */,
+				CE81767A2B49BD560089BAAF /* PurchaseRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

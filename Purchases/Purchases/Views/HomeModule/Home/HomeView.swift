@@ -20,8 +20,8 @@ struct HomeView<R: HomeRouter>: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: [.init(), .init()], spacing: 30) {
-                    ForEach(viewModel.purchases, id: \.self) { item in
-                        purchaseCell(for: item)
+                    ForEach(viewModel.purchases, id: \.self) { purchase in
+                        purchaseCell(for: purchase)
                     }
                 }
                 .padding()
@@ -40,14 +40,21 @@ struct HomeView<R: HomeRouter>: View {
         }
     }
     
-    private func purchaseCell(for item: String) -> some View {
-        VStack(alignment: .leading, spacing: 25) {
+    private func purchaseCell(for purchase: Purchase) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
             
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .frame(width: 120, height: 120)
             
-            Text("$\(item)")
+            Text(purchase.name)
+                .lineLimit(1)
+            
+            Text("$\(purchase.price)")
+                .lineLimit(1)
+            
+            Text("\(purchase.description)...")
+                .lineLimit(1)
         }
         .padding()
         .overlay {

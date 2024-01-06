@@ -9,7 +9,10 @@ final class HomeViewModel<R: HomeRouter> {
     
     // MARK: - Properties
     
-    var purchases: [String] = (1...100).map { "\($0)" }
+    var purchases: [Purchase] = (1...100).map { .init(name: "Name \($0)",
+                                                      description: "Description",
+                                                      price: $0 + 100,
+                                                      date: $0 + 1000) }
     
     private let router: R
     
