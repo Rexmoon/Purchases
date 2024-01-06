@@ -20,7 +20,21 @@ final class HomeCoordinator<R: AppRouter> {
     
     private lazy var homeViewController: UIViewController = {
         let view = HomeView(viewModel: homeViemodel)
-        return UIHostingController(rootView: view)
+        let viewController = UIHostingController(rootView: view)
+        return viewController
+    }()
+    
+    private lazy var addPurchaseViewModel: AddPurchaseViewModel = {
+        AddPurchaseViewModel(router: self)
+    }()
+    
+    private lazy var addPurchaseViewController: UIViewController = {
+        let view = AddPurchaseView(viewModel: addPurchaseViewModel)
+        let viewController = UIHostingController(rootView: view)
+        
+        viewController.title = "Add Purchase"
+        
+        return viewController
     }()
     
     // MARK: - Initializers
@@ -48,10 +62,13 @@ extension HomeCoordinator: HomeRouter {
     }
     
     func process(route: HomeTransition) {
-         
+        switch route {
+            case .showAddPurchaseView:
+                router.navController.pushViewController(addPurchaseViewController, animated: true)
+        }
     }
     
     func exit() {
-         
+        router.navController.popViewController(animated: true)
     }
 }

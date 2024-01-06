@@ -24,11 +24,9 @@ final class HomeViewModel<R: HomeRouter> {
 
 extension HomeViewModel {
     
-    func didTapItem(in index: Int) {
-//        router.process(route: .showHome)
-    }
+    func didTapItem(in index: Int) { }
     
     func rightButtonClicked() {
-        
+        router.process(route: .showAddPurchaseView)
     }
 }

@@ -21,6 +21,8 @@
 		CEE90E612B48AC2600B01728 /* HomeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90E602B48AC2600B01728 /* HomeTransition.swift */; };
 		CEE90E632B48AC6F00B01728 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90E622B48AC6F00B01728 /* HomeCoordinator.swift */; };
 		CEE90E652B48AD3B00B01728 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90E642B48AD3B00B01728 /* App.swift */; };
+		CEE90E6A2B48B8F700B01728 /* AddPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90E692B48B8F700B01728 /* AddPurchaseView.swift */; };
+		CEE90E6C2B48B99600B01728 /* AddPurchaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE90E6B2B48B99600B01728 /* AddPurchaseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		CEE90E602B48AC2600B01728 /* HomeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTransition.swift; sourceTree = "<group>"; };
 		CEE90E622B48AC6F00B01728 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		CEE90E642B48AD3B00B01728 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		CEE90E692B48B8F700B01728 /* AddPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseView.swift; sourceTree = "<group>"; };
+		CEE90E6B2B48B99600B01728 /* AddPurchaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE90E4F2B48A57B00B01728 /* Home */,
+				CEE90E662B48B86600B01728 /* AddPurchase */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +126,15 @@
 				CEE90E5E2B48AC1600B01728 /* HomeRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		CEE90E662B48B86600B01728 /* AddPurchase */ = {
+			isa = PBXGroup;
+			children = (
+				CEE90E692B48B8F700B01728 /* AddPurchaseView.swift */,
+				CEE90E6B2B48B99600B01728 /* AddPurchaseViewModel.swift */,
+			);
+			path = AddPurchase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +210,7 @@
 				CEE90E4E2B48A56F00B01728 /* HomeView.swift in Sources */,
 				CEBD47F42B48A390008FDE77 /* AppDelegate.swift in Sources */,
 				CEE90E562B48AA7800B01728 /* Coordinator.swift in Sources */,
+				CEE90E6C2B48B99600B01728 /* AddPurchaseViewModel.swift in Sources */,
 				CEE90E612B48AC2600B01728 /* HomeTransition.swift in Sources */,
 				CEE90E592B48AAA300B01728 /* Router.swift in Sources */,
 				CEE90E5B2B48AAFB00B01728 /* AppRouter.swift in Sources */,
@@ -205,6 +220,7 @@
 				CEE90E652B48AD3B00B01728 /* App.swift in Sources */,
 				CEE90E512B48A58C00B01728 /* HomeViewModel.swift in Sources */,
 				CEE90E632B48AC6F00B01728 /* HomeCoordinator.swift in Sources */,
+				CEE90E6A2B48B8F700B01728 /* AddPurchaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

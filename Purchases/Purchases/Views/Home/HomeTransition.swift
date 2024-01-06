@@ -6,5 +6,7 @@
 //
 
 enum HomeTransition {
-    case showHome
+    case showAddPurchaseView
+    
+    var identifier: String { String(describing: self) }
 }

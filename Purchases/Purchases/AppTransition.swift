@@ -8,7 +8,7 @@
 enum AppTransition {
     case showHomeModule
     
-    var identifier: String { String(describing: self).capitalized }
+    var identifier: String { String(describing: self) }
     
     func coordinatorFor<R: AppRouter>(router: R) -> Coordinator {
         return switch self {
