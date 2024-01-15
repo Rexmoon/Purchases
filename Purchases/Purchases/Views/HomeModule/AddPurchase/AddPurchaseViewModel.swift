@@ -5,12 +5,17 @@
 //  Created by User on 1/5/24.
 //
 
+import Foundation
+
 final class AddPurchaseViewModel<R: HomeRouter> {
     
     private let router: R
+    private let store: PurchaseStore
     
-    init(router: R) {
+    init(router: R, 
+         store: PurchaseStore = RealmRepository()) {
         self.router = router
+        self.store = store
     }
 }
 
@@ -20,5 +25,27 @@ extension AddPurchaseViewModel {
     
     func didTapBackButton() {
         router.exit()
+    }
+}
+
+extension AddPurchaseViewModel {
+    
+    func createItemWith(name: String,
+                        desc: String,
+                        price: String,
+                        date: Date) {
+        let purchase: Purchase = .init(name: name, 
+                                       desc: desc,
+                                       price: Int(price) ?? 0,
+                                       date: date.toInt())
+        
+        Task { @MainActor [unowned self]  in
+            do {
+                try store.create(purchase: purchase)
+                didTapBackButton()
+            } catch {
+                print(error)
+            }
+        }
     }
 }

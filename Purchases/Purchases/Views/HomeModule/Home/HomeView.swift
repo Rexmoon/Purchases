@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView<R: HomeRouter>: View {
     
-    private let viewModel: HomeViewModel<R>
+    @ObservedObject private var viewModel: HomeViewModel<R>
     
     init(viewModel: HomeViewModel<R>) {
         self.viewModel = viewModel
@@ -18,14 +18,21 @@ struct HomeView<R: HomeRouter>: View {
     var body: some View {
         
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: [.init(), .init()], spacing: 30) {
-                    ForEach(viewModel.purchases, id: \.self) { purchase in
-                        purchaseCell(for: purchase)
+            ZStack {
+                
+                if viewModel.purchases.isEmpty {
+                    ProgressView()
+                } else {
+                    ScrollView {
+                        LazyVGrid(columns: [.init(), .init()]) {
+                            ForEach(viewModel.purchases, id: \.self) { purchase in
+                                purchaseCell(for: purchase)
+                            }
+                        }
                     }
                 }
-                .padding()
             }
+            .padding()
             .navigationTitle("Purchase")
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
@@ -37,23 +44,35 @@ struct HomeView<R: HomeRouter>: View {
                     }
                 }
             }
+            .onAppear {
+                viewModel.loadData()
+            }
         }
     }
     
+    // MARK: - Purchase Cell View
+    
     private func purchaseCell(for purchase: Purchase) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        
+        VStack(alignment: .leading, spacing: 20) {
             
-            Image(systemName: "person.circle.fill")
+            HStack {
+                
+                Spacer()
+                
+                Circle()
+                    .frame(maxWidth: 10, maxHeight: 10)
+                    .foregroundStyle(purchase.status == Status.sold.rawValue ? .red : .green)
+            }
+            
+            Image(systemName: "square.fill")
                 .resizable()
-                .frame(width: 120, height: 120)
+                .frame(width: 140, height: 180)
             
             Text(purchase.name)
                 .lineLimit(1)
             
             Text("$\(purchase.price)")
-                .lineLimit(1)
-            
-            Text("\(purchase.description)...")
                 .lineLimit(1)
         }
         .padding()
@@ -70,6 +89,11 @@ struct HomeView<R: HomeRouter>: View {
     let app = App()
     let coordinator = HomeCoordinator(router: app)
     let viewModel = HomeViewModel(router: coordinator)
+    
+    viewModel.purchases = (1...100).map { .init(name: "Name \($0)",
+                                                desc: "Description",
+                                                price: $0 + 100,
+                                                date: $0 + 1000) }
     
     return HomeView(viewModel: viewModel)
 }

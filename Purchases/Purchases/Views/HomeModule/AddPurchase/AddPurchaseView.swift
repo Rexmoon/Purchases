@@ -9,11 +9,11 @@ import SwiftUI
 
 struct AddPurchaseView<R: HomeRouter>: View {
     
-    @State private var idText: String = "01"
     @State private var nameText: String = ""
     @State private var priceText: String = ""
     @State private var descriptionText: String = ""
     @State private var dateSelection: Date = Date.now
+    @State private var showAlert: Bool = false
     
     private let viewModel: AddPurchaseViewModel<R>
     
@@ -25,35 +25,48 @@ struct AddPurchaseView<R: HomeRouter>: View {
         
         NavigationStack {
             
-            VStack(alignment: .leading, spacing: 50) {
+            ScrollView {
                 
-                textField(title: "Product id", state: $idText)
-                    .disabled(true)
-                
-                textField(title: "Name", state: $nameText)
-                
-                textField(title: "Description", state: $descriptionText, isArea: true)
-                
-                textField(title: "Price", state: $priceText)
-                
-                DatePicker("Made on", selection: $dateSelection, in: ...Date.now, displayedComponents: [.date])
-                
-                Spacer()
-            }
-            .padding()
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        
-                    } label: {
-                        Text("Save")
+                VStack(alignment: .leading, spacing: 50) {
+                    
+                    textField(title: "Name", state: $nameText)
+                    
+                    textField(title: "Description", state: $descriptionText, isArea: true)
+                    
+                    textField(title: "Price", state: $priceText, keyboardType: .numberPad)
+                    
+                    DatePicker("Made on", selection: $dateSelection, in: ...Date.now, displayedComponents: [.date])
+                }
+                .padding()
+                .toolbar {
+                    ToolbarItem(placement: .bottomBar) {
+                        Button {
+                            
+                            guard !nameText.isEmpty,
+                                  !descriptionText.isEmpty,
+                                  !priceText.isEmpty
+                            else {
+                                showAlert.toggle()
+                                return
+                            }
+                            
+                            viewModel.createItemWith(name: nameText,
+                                                     desc: descriptionText,
+                                                     price: priceText,
+                                                     date: dateSelection)
+                        } label: {
+                            Text("Save")
+                        }
+                        .padding(.horizontal)
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.blue)
+                        }
+                        .foregroundStyle(.white)
+                        .alert("Some properties are required!", isPresented: $showAlert) {
+                            Text("Ok")
+                        }
                     }
-                    .padding(.horizontal)
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.blue)
-                    }
-                    .foregroundStyle(.white)
                 }
             }
         }
@@ -61,7 +74,8 @@ struct AddPurchaseView<R: HomeRouter>: View {
     
     private func textField(title: String, 
                            state: Binding<String>,
-                           isArea: Bool = false) -> some View {
+                           isArea: Bool = false,
+                           keyboardType: UIKeyboardType = .default) -> some View {
         VStack(alignment: .leading) {
             
             Text("\(title): ")
@@ -69,18 +83,17 @@ struct AddPurchaseView<R: HomeRouter>: View {
             
             if isArea {
                 TextEditor(text: $descriptionText)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 150)
                     .overlay {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(lineWidth: 1)
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(Color(.gray.withAlphaComponent(0.3)))
                     }
             } else {
-                TextField("Tap to add \(title)", text: state)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(lineWidth: 1)
-                            .foregroundStyle(.gray)
-                    }
+                TextField(title, text: state)
+                    .keyboardType(keyboardType)
+                    .textFieldStyle(.roundedBorder)
             }
         }
     }
