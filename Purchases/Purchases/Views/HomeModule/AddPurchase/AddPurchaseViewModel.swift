@@ -49,6 +49,7 @@ extension AddPurchaseViewModel {
             do {
                 try store.create(purchase: purchase)
                 didTapBackButton()
+                router.process(route: .showDetailview(purchase.id.stringValue))
             } catch {
                 print(error)
             }

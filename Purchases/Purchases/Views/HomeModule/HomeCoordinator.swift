@@ -28,14 +28,14 @@ final class HomeCoordinator<R: AppRouter> {
         AddPurchaseViewModel(router: self)
     }()
     
-    private lazy var addPurchaseViewController: UIViewController = {
+    private var addPurchaseViewController: UIViewController {
         let view = AddPurchaseView(viewModel: addPurchaseViewModel)
         let viewController = UIHostingController(rootView: view)
         
         viewController.title = "Add Purchase"
         
         return viewController
-    }()
+    }
     
     private lazy var detailViewModel: DetailViewModel = {
         DetailViewModel(router: self)
