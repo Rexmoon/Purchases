@@ -34,4 +34,20 @@ extension RealmRepository: PurchaseStore {
     func update(id: RealmSwift.ObjectId) throws { }
     
     func delete(id: RealmSwift.ObjectId) throws { }
+    
+    func get(by id: String) throws -> Purchase {
+        do {
+            let id = try ObjectId(string: id)
+            
+            guard 
+                let purchase = realm.object(ofType: Purchase.self, forPrimaryKey: id)
+            else {
+                throw StoreError.reading
+            }
+            
+            return purchase
+        } catch {
+            throw StoreError.generic(error)
+        }
+    }
 }

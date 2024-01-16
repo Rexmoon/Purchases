@@ -7,13 +7,17 @@
 
 import Foundation
 
-enum Error: LocalizedError {
+enum StoreError: Error {
     case creating
     case reading
     case updating
     case deleting
+    case generic(Error)
     
     var errorDescription: String? {
-        String(describing: self).capitalized
+        return switch self {
+            case .generic(let error): error.localizedDescription
+            default: String(describing: self).capitalized
+        }
     }
 }

@@ -9,10 +9,14 @@ import Foundation
 
 final class AddPurchaseViewModel<R: HomeRouter> {
     
+    // MARK: - Properties
+    
     private let router: R
     private let store: PurchaseStore
     
-    init(router: R, 
+    // MARK: - Initializers
+    
+    init(router: R,
          store: PurchaseStore = RealmRepository()) {
         self.router = router
         self.store = store
@@ -27,6 +31,8 @@ extension AddPurchaseViewModel {
         router.exit()
     }
 }
+
+// MARK: - Store
 
 extension AddPurchaseViewModel {
     

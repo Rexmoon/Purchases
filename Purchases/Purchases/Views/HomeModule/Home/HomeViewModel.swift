@@ -25,7 +25,7 @@ final class HomeViewModel<R: HomeRouter>: ObservableObject {
     }
 }
 
-// MARK: - Navigation Delegate
+// MARK: - Navigation
 
 extension HomeViewModel {
     
@@ -39,7 +39,10 @@ extension HomeViewModel {
         }
     }
     
-    func didTapItem(in index: Int) { }
+    func didTapItem(by id: String) {
+        guard let purchase = purchases.first(where: { $0.id.stringValue == id }) else { return }
+        router.process(route: .showDetailview(purchase.id.stringValue))
+    }
     
     func rightButtonClicked() {
         router.process(route: .showAddPurchaseView)

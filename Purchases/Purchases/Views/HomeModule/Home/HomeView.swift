@@ -9,26 +9,25 @@ import SwiftUI
 
 struct HomeView<R: HomeRouter>: View {
     
+    // MARK: - Properties
+    
     @ObservedObject private var viewModel: HomeViewModel<R>
+    
+    // MARK: - Initializers
     
     init(viewModel: HomeViewModel<R>) {
         self.viewModel = viewModel
     }
     
+    // MARK: - Content
+    
     var body: some View {
         
-        NavigationStack {
-            ZStack {
-                
-                if viewModel.purchases.isEmpty {
-                    ProgressView()
-                } else {
-                    ScrollView {
-                        LazyVGrid(columns: [.init(), .init()]) {
-                            ForEach(viewModel.purchases, id: \.self) { purchase in
-                                purchaseCell(for: purchase)
-                            }
-                        }
+        ProgressContainer(validation: !viewModel.purchases.isEmpty) {
+            ScrollView {
+                LazyVGrid(columns: [.init(), .init()]) {
+                    ForEach(viewModel.purchases, id: \.self) { purchase in
+                        purchaseCell(for: purchase)
                     }
                 }
             }
@@ -44,9 +43,9 @@ struct HomeView<R: HomeRouter>: View {
                     }
                 }
             }
-            .onAppear {
-                viewModel.loadData()
-            }
+        }
+        .onAppear {
+            viewModel.loadData()
         }
     }
     
@@ -65,7 +64,7 @@ struct HomeView<R: HomeRouter>: View {
                     .foregroundStyle(purchase.status == Status.sold.rawValue ? .red : .green)
             }
             
-            Image(systemName: "square.fill")
+            Image(systemName: "00.square.fill")
                 .resizable()
                 .frame(width: 140, height: 180)
             
@@ -79,6 +78,9 @@ struct HomeView<R: HomeRouter>: View {
         .overlay {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(lineWidth: 1)
+        }
+        .onTapGesture {
+            viewModel.didTapItem(by: purchase.id.stringValue)
         }
     }
 }

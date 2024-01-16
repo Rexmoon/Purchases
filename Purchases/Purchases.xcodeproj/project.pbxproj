@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		CE0664D12B52E9CC00DDA96D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE0664D02B52E9CC00DDA96D /* Realm */; };
 		CE0664D32B52E9CC00DDA96D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE0664D22B52E9CC00DDA96D /* RealmSwift */; };
+		CE3873792B571E7C004FBC18 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3873782B571E7C004FBC18 /* RoundedButton.swift */; };
+		CE38737B2B5732FE004FBC18 /* ProgressContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38737A2B5732FE004FBC18 /* ProgressContainer.swift */; };
 		CE65674D2B55B0D600F4ED40 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65674C2B55B0D600F4ED40 /* Date.swift */; };
 		CE6567502B55BEB800F4ED40 /* Error+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65674F2B55BEB800F4ED40 /* Error+Helper.swift */; };
 		CE6567522B55C15E00F4ED40 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6567512B55C15E00F4ED40 /* Results.swift */; };
+		CE6567552B55F36500F4ED40 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6567542B55F36500F4ED40 /* DetailView.swift */; };
+		CE6567572B55F37300F4ED40 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6567562B55F37300F4ED40 /* DetailViewModel.swift */; };
 		CE8176762B49B6DC0089BAAF /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8176752B49B6DC0089BAAF /* Purchase.swift */; };
 		CE8176782B49BD190089BAAF /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8176772B49BD190089BAAF /* RealmRepository.swift */; };
 		CE81767A2B49BD560089BAAF /* PurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8176792B49BD560089BAAF /* PurchaseStore.swift */; };
@@ -34,9 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE3873782B571E7C004FBC18 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		CE38737A2B5732FE004FBC18 /* ProgressContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressContainer.swift; sourceTree = "<group>"; };
 		CE65674C2B55B0D600F4ED40 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		CE65674F2B55BEB800F4ED40 /* Error+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Helper.swift"; sourceTree = "<group>"; };
 		CE6567512B55C15E00F4ED40 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		CE6567542B55F36500F4ED40 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		CE6567562B55F37300F4ED40 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		CE8176752B49B6DC0089BAAF /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		CE8176772B49BD190089BAAF /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		CE8176792B49BD560089BAAF /* PurchaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseStore.swift; sourceTree = "<group>"; };
@@ -73,9 +81,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3873772B571E5F004FBC18 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE3873782B571E7C004FBC18 /* RoundedButton.swift */,
+				CE38737A2B5732FE004FBC18 /* ProgressContainer.swift */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
 		CE65674A2B55B0C300F4ED40 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CE3873772B571E5F004FBC18 /* ReusableViews */,
 				CE65674E2B55BEA300F4ED40 /* Error+Helper */,
 				CE65674B2B55B0CC00F4ED40 /* Extensions */,
 			);
@@ -97,6 +115,15 @@
 				CE65674F2B55BEB800F4ED40 /* Error+Helper.swift */,
 			);
 			path = "Error+Helper";
+			sourceTree = "<group>";
+		};
+		CE6567532B55F2F800F4ED40 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CE6567542B55F36500F4ED40 /* DetailView.swift */,
+				CE6567562B55F37300F4ED40 /* DetailViewModel.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		CE81766F2B49B5220089BAAF /* Repository */ = {
@@ -124,6 +151,7 @@
 				CEE90E622B48AC6F00B01728 /* HomeCoordinator.swift */,
 				CEE90E4F2B48A57B00B01728 /* Home */,
 				CEE90E662B48B86600B01728 /* AddPurchase */,
+				CE6567532B55F2F800F4ED40 /* Detail */,
 			);
 			path = HomeModule;
 			sourceTree = "<group>";
@@ -289,11 +317,15 @@
 				CEE90E562B48AA7800B01728 /* Coordinator.swift in Sources */,
 				CEE90E6C2B48B99600B01728 /* AddPurchaseViewModel.swift in Sources */,
 				CEE90E612B48AC2600B01728 /* HomeTransition.swift in Sources */,
+				CE3873792B571E7C004FBC18 /* RoundedButton.swift in Sources */,
 				CEE90E592B48AAA300B01728 /* Router.swift in Sources */,
 				CEE90E5B2B48AAFB00B01728 /* AppRouter.swift in Sources */,
 				CE65674D2B55B0D600F4ED40 /* Date.swift in Sources */,
 				CEE90E542B48AA3F00B01728 /* AppTransition.swift in Sources */,
+				CE38737B2B5732FE004FBC18 /* ProgressContainer.swift in Sources */,
+				CE6567572B55F37300F4ED40 /* DetailViewModel.swift in Sources */,
 				CEBD47F62B48A390008FDE77 /* SceneDelegate.swift in Sources */,
+				CE6567552B55F36500F4ED40 /* DetailView.swift in Sources */,
 				CEE90E5F2B48AC1600B01728 /* HomeRouter.swift in Sources */,
 				CEE90E652B48AD3B00B01728 /* App.swift in Sources */,
 				CE8176782B49BD190089BAAF /* RealmRepository.swift in Sources */,

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddPurchaseView<R: HomeRouter>: View {
     
+    // MARK: - Properties
+    
     @State private var nameText: String = ""
     @State private var priceText: String = ""
     @State private var descriptionText: String = ""
@@ -17,9 +19,13 @@ struct AddPurchaseView<R: HomeRouter>: View {
     
     private let viewModel: AddPurchaseViewModel<R>
     
+    // MARK: - Initializers
+    
     init(viewModel: AddPurchaseViewModel<R>) {
         self.viewModel = viewModel
     }
+    
+    // MARK: - Content
     
     var body: some View {
         
@@ -41,35 +47,34 @@ struct AddPurchaseView<R: HomeRouter>: View {
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
                         Button {
-                            
-                            guard !nameText.isEmpty,
-                                  !descriptionText.isEmpty,
-                                  !priceText.isEmpty
-                            else {
-                                showAlert.toggle()
-                                return
-                            }
-                            
-                            viewModel.createItemWith(name: nameText,
-                                                     desc: descriptionText,
-                                                     price: priceText,
-                                                     date: dateSelection)
+                            validateSaving()
                         } label: {
-                            Text("Save")
+                            RoundedButton(title: "Save")
                         }
-                        .padding(.horizontal)
-                        .background {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.blue)
-                        }
-                        .foregroundStyle(.white)
-                        .alert("Some properties are required!", isPresented: $showAlert) {
+                        .alert("Fill missing properties!", isPresented: $showAlert) {
                             Text("Ok")
                         }
                     }
                 }
             }
         }
+    }
+    
+    // MARK: - Functions
+    
+    private  func validateSaving() {
+        guard !nameText.isEmpty,
+              !descriptionText.isEmpty,
+              !priceText.isEmpty 
+        else {
+            showAlert.toggle()
+            return
+        }
+        
+        viewModel.createItemWith(name: nameText,
+                                 desc: descriptionText,
+                                 price: priceText,
+                                 date: dateSelection)
     }
     
     private func textField(title: String, 
@@ -98,6 +103,8 @@ struct AddPurchaseView<R: HomeRouter>: View {
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     let app = App()

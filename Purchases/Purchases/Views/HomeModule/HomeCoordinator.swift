@@ -37,6 +37,15 @@ final class HomeCoordinator<R: AppRouter> {
         return viewController
     }()
     
+    private lazy var detailViewModel: DetailViewModel = {
+        DetailViewModel(router: self)
+    }()
+    
+    private lazy var detailViewController: UIViewController = {
+        let view = DetailView(viewModel: detailViewModel)
+        return UIHostingController(rootView: view)
+    }()
+    
     // MARK: - Initializers
     
     init(router: R) {
@@ -65,6 +74,10 @@ extension HomeCoordinator: HomeRouter {
         switch route {
             case .showAddPurchaseView:
                 router.navController.pushViewController(addPurchaseViewController, animated: true)
+            case .showDetailview(let objectId):
+                detailViewModel.objectId = objectId
+                router.navController.pushViewController(detailViewController, animated: true)
+                
         }
     }
     

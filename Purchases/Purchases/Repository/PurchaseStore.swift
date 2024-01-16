@@ -12,4 +12,5 @@ protocol PurchaseStore {
     func read() throws -> [Purchase]
     func update(id: ObjectId) throws
     func delete(id: ObjectId) throws
+    func get(by id: String) throws -> Purchase
 }
