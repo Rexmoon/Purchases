@@ -29,10 +29,15 @@ final class HomeViewModel<R: HomeRouter>: ObservableObject {
 
 extension HomeViewModel {
     
+    @MainActor
     func loadData() {
-        Task { @MainActor [unowned self] in
+        Task { [unowned self] in
             do {
                 purchases = try store.read()
+                
+                if purchases.isEmpty {
+                    rightButtonClicked()
+                }
             } catch {
                 print(error)
             }

@@ -70,6 +70,7 @@ extension HomeCoordinator: HomeRouter {
     func process(route: HomeTransition) {
         switch route {
             case .showAddPurchaseView:
+                addPurchaseViewModel.purchase = nil
                 addPurchaseViewController.title = "Add Purchase"
                 router.navController.pushViewController(addPurchaseViewController, animated: true)
                 

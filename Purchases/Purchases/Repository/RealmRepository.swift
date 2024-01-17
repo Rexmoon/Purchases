@@ -19,11 +19,10 @@ extension RealmRepository: PurchaseStore {
     func create(purchase: Purchase) throws {
         do {
             try realm.write {
-                /// You can add an object array instead of
                 realm.add(purchase)
             }
         } catch {
-            throw error
+            throw StoreError.generic(error)
         }
     }
     
@@ -36,7 +35,6 @@ extension RealmRepository: PurchaseStore {
                 desc: String,
                 price: Int,
                 date: Int) throws {
-        
         guard
             let purchaseToEdit = realm.objects(Purchase.self).first(where: { $0.id == id })
         else {
@@ -44,20 +42,31 @@ extension RealmRepository: PurchaseStore {
         }
         
         do {
-            
             try realm.write {
                 purchaseToEdit.name = name
                 purchaseToEdit.desc = desc
                 purchaseToEdit.price = price
                 purchaseToEdit.date = date
             }
-            
         } catch {
             throw StoreError.generic(error)
         }
     }
     
-    func delete(by id: String) throws { }
+    func delete(by id: ObjectId) throws {
+        do {
+            try realm.write {
+                guard 
+                    let purchaseToDelete = realm.objects(Purchase.self).first(where: { $0.id == id })
+                else {
+                    throw StoreError.deleting
+                }
+                realm.delete(purchaseToDelete)
+            }
+        } catch {
+            throw StoreError.deleting
+        }
+    }
     
     func get(by id: String) throws -> Purchase {
         do {

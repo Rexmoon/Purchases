@@ -56,14 +56,16 @@ extension AddOrEditPurchaseViewModel {
                                        price: Int(price) ?? 0,
                                        date: date.toInt())
         
-        Task { @MainActor [unowned self]  in
+        Task { @MainActor  [unowned self]  in
             do {
                 self.purchase == nil ?
                 try store.create(purchase: purchase) :
                 try store.update(id: self.purchase!.id, name: name, desc: desc, price: Int(price) ?? 0, date: date.toInt())
+                
                 didTapBackButton()
                 didTapBackButton()
-                router.process(route: .showDetailview(self.purchase!.id.stringValue))
+                router.process(route: .showDetailview(self.purchase?.id.stringValue ?? purchase.id.stringValue))
+                self.purchase = nil
             } catch {
                 print(error)
             }

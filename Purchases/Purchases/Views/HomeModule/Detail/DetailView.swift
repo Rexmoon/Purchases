@@ -60,17 +60,15 @@ struct DetailView<R: HomeRouter>: View {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
                         
-                        Button {
-                            viewModel.editButtonClicked()
-                        } label: {
-                            RoundedButton(title: "Edit", color: .green)
-                        }
+                        RoundedButton(title: "Edit")
+                            .onTapGesture {
+                                viewModel.editButtonClicked()
+                            }
                         
-                        Button {
-                            viewModel.deleteButtonClicked()
-                        } label: {
-                            RoundedButton(title: "Delete", color: .red)
-                        }
+                        RoundedButton(title: "Delete", color: .red)
+                            .onTapGesture {
+                                viewModel.deleteButtonClicked()
+                            }
                     }
                 }
             }

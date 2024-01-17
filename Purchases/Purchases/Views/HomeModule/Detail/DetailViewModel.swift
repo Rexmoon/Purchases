@@ -39,8 +39,15 @@ extension DetailViewModel {
         router.process(route: .showEditPurchaseView(purchase))
     }
     
+    @MainActor
     func deleteButtonClicked() {
-        
+        Task { [unowned self] in
+            do {
+                try store.delete(by: purchase!.id)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
@@ -48,8 +55,9 @@ extension DetailViewModel {
 
 extension DetailViewModel {
     
+    @MainActor
     func loadData() {
-        Task { @MainActor [unowned self] in
+        Task {  [unowned self] in
             do {
                 /// For ProgressContainet test
                 try await Task.sleep(for: .seconds(1))
