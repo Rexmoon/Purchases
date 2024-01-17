@@ -34,6 +34,14 @@ extension DetailViewModel {
     func didTapBackButton() {
         router.exit()
     }
+    
+    func editButtonClicked() {
+        router.process(route: .showEditPurchaseView(purchase))
+    }
+    
+    func deleteButtonClicked() {
+        
+    }
 }
 
 // MARK: - Store
@@ -45,7 +53,6 @@ extension DetailViewModel {
             do {
                 /// For ProgressContainet test
                 try await Task.sleep(for: .seconds(1))
-                
                 purchase = try store.get(by: objectId)
             } catch {
                 print(error)

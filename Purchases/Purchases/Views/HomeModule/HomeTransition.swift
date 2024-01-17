@@ -8,6 +8,7 @@
 enum HomeTransition {
     case showAddPurchaseView
     case showDetailview(String)
+    case showEditPurchaseView(Purchase?)
     
     var identifier: String { String(describing: self).capitalized }
 }

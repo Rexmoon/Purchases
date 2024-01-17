@@ -59,8 +59,18 @@ struct DetailView<R: HomeRouter>: View {
                 
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
-                        RoundedButton(title: "Delete", color: .red)
-                        RoundedButton(title: "Edit", color: .green)
+                        
+                        Button {
+                            viewModel.editButtonClicked()
+                        } label: {
+                            RoundedButton(title: "Edit", color: .green)
+                        }
+                        
+                        Button {
+                            viewModel.deleteButtonClicked()
+                        } label: {
+                            RoundedButton(title: "Delete", color: .red)
+                        }
                     }
                 }
             }

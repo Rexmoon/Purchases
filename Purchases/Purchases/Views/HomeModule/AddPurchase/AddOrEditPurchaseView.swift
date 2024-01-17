@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddPurchaseView<R: HomeRouter>: View {
+struct AddOrEditPurchaseView<R: HomeRouter>: View {
     
     // MARK: - Properties
     
@@ -17,11 +17,11 @@ struct AddPurchaseView<R: HomeRouter>: View {
     @State private var dateSelection: Date = Date.now
     @State private var showAlert: Bool = false
     
-    private let viewModel: AddPurchaseViewModel<R>
+    private let viewModel: AddOrEditPurchaseViewModel<R>
     
     // MARK: - Initializers
     
-    init(viewModel: AddPurchaseViewModel<R>) {
+    init(viewModel: AddOrEditPurchaseViewModel<R>) {
         self.viewModel = viewModel
     }
     
@@ -56,13 +56,16 @@ struct AddPurchaseView<R: HomeRouter>: View {
                         }
                     }
                 }
+                .onAppear {
+                    fillToUpdate()
+                }
             }
         }
     }
     
     // MARK: - Functions
     
-    private  func validateSaving() {
+    private func validateSaving() {
         guard !nameText.isEmpty,
               !descriptionText.isEmpty,
               !priceText.isEmpty 
@@ -71,10 +74,10 @@ struct AddPurchaseView<R: HomeRouter>: View {
             return
         }
         
-        viewModel.createItemWith(name: nameText,
-                                 desc: descriptionText,
-                                 price: priceText,
-                                 date: dateSelection)
+        viewModel.createOrEditItemWith(name: nameText,
+                                       desc: descriptionText,
+                                       price: priceText,
+                                       date: dateSelection)
     }
     
     private func textField(title: String, 
@@ -102,6 +105,16 @@ struct AddPurchaseView<R: HomeRouter>: View {
             }
         }
     }
+    
+    private func fillToUpdate() {
+        
+        guard let purchase = viewModel.purchase else { return }
+        
+        nameText = purchase.name
+        priceText = "\(purchase.price)"
+        descriptionText = purchase.desc
+        dateSelection = purchase.date.toDate()
+    }
 }
 
 // MARK: - Preview
@@ -109,6 +122,6 @@ struct AddPurchaseView<R: HomeRouter>: View {
 #Preview {
     let app = App()
     let coordinator = HomeCoordinator(router: app)
-    let viewModel = AddPurchaseViewModel(router: coordinator)
-    return AddPurchaseView(viewModel: viewModel)
+    let viewModel = AddOrEditPurchaseViewModel(router: coordinator)
+    return AddOrEditPurchaseView(viewModel: viewModel)
 }

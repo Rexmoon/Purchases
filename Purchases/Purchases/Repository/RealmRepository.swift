@@ -31,9 +31,33 @@ extension RealmRepository: PurchaseStore {
         realm.objects(Purchase.self).toArray(type: Purchase.self)
     }
     
-    func update(id: RealmSwift.ObjectId) throws { }
+    func update(id: ObjectId,
+                name: String,
+                desc: String,
+                price: Int,
+                date: Int) throws {
+        
+        guard
+            let purchaseToEdit = realm.objects(Purchase.self).first(where: { $0.id == id })
+        else {
+            throw StoreError.updating
+        }
+        
+        do {
+            
+            try realm.write {
+                purchaseToEdit.name = name
+                purchaseToEdit.desc = desc
+                purchaseToEdit.price = price
+                purchaseToEdit.date = date
+            }
+            
+        } catch {
+            throw StoreError.generic(error)
+        }
+    }
     
-    func delete(id: RealmSwift.ObjectId) throws { }
+    func delete(by id: String) throws { }
     
     func get(by id: String) throws -> Purchase {
         do {
